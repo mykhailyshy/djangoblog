@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
+def some_function():
+    from .models import Post
 
 
 class Post(models.Model):
