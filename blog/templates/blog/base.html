@@ -9,9 +9,20 @@
     </head>
 <body>
     <div class="page-header">
-        <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
-        <h1><a href="/">Djangoblog</a></h1>
-    </div>
+        {% if user.is_authenticated %}
+               <a href="{% url 'post_draft_list' %}" class="top-menu">Drafts</a>
+               <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+               <a href="{% url 'post_draft_list' %}" class="top-menu"><span class="glyphicon glyphicon-edit"></span></a>
+               <p class="top-menu">Hello {{ user.username }}!</p>
+               <form method="post" action="{% url 'logout' %}">
+               {% csrf_token %}
+               <button type="submit" class="btn btn-link top-menu">Log out</button>
+               </form>
+        {% else %}
+               <a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a>
+           {% endif %}
+           <h1><a href="/">Djangoblog</a></h1>
+       </div>
     <div class="content container">
         <div class="row">
             <div class="col-md-8">
